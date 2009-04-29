@@ -12,7 +12,7 @@ namespace DarkBlade
         public dbFoundation()
         {
             // Creates a new instance of SQLiteBase and opens database in file "test.db"
-
+            // test making a change...
             SQLiteBase db = new SQLiteBase("Darkblade.db");
             // executes SELECT query and store results in new data table
 
