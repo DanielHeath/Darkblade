@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SQLiteWrapper</name>
+    </assembly>
+    <members>
+        <member name="T:SQLiteWrapper.SQLiteBase">
+            <summary>
+            SQLite wrapper with funtions for opening, closing and executing queries.
+            </summary>
+        </member>
+        <member name="M:SQLiteWrapper.SQLiteBase.#ctor">
+            <summary>
+            Creates new instance of SQLiteBase class with no database attached.
+            </summary>
+        </member>
+        <member name="M:SQLiteWrapper.SQLiteBase.#ctor(System.String)">
+            <summary>
+            Creates new instance of SQLiteBase class and opens database with given name.
+            </summary>
+            <param name="baseName">Name (and path) to SQLite database file</param>
+        </member>
+        <member name="M:SQLiteWrapper.SQLiteBase.OpenDatabase(System.String)">
+            <summary>
+            Opens database. 
+            </summary>
+            <param name="baseName">Name of database file</param>
+        </member>
+        <member name="M:SQLiteWrapper.SQLiteBase.CloseDatabase">
+            <summary>
+            Closes opened database.
+            </summary>
+        </member>
+        <member name="M:SQLiteWrapper.SQLiteBase.GetTables">
+            <summary>
+            Returns the list of tables in opened database.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SQLiteWrapper.SQLiteBase.ExecuteNonQuery(System.String)">
+            <summary>
+            Executes query that does not return anything (e.g. UPDATE, INSERT, DELETE).
+            </summary>
+            <param name="query"></param>
+        </member>
+        <member name="M:SQLiteWrapper.SQLiteBase.ExecuteQuery(System.String)">
+            <summary>
+            Executes query that does return something (e.g. SELECT).
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SQLiteWrapper.SQLiteBase.SQLiteDataTypes">
+            <summary>
+            SQLite data types.
+            </summary>
+        </member>
+        <member name="F:SQLiteWrapper.SQLiteBase.SQLiteDataTypes.INT">
+            <summary>
+            Integer numbers.
+            </summary>
+        </member>
+        <member name="F:SQLiteWrapper.SQLiteBase.SQLiteDataTypes.FLOAT">
+            <summary>
+            Decimal numbers.
+            </summary>
+        </member>
+        <member name="F:SQLiteWrapper.SQLiteBase.SQLiteDataTypes.TEXT">
+            <summary>
+            All kinds of texts.
+            </summary>
+        </member>
+        <member name="F:SQLiteWrapper.SQLiteBase.SQLiteDataTypes.BLOB">
+            <summary>
+            Blob objects - binary large objects.
+            </summary>
+        </member>
+        <member name="F:SQLiteWrapper.SQLiteBase.SQLiteDataTypes.NULL">
+            <summary>
+            Nothing.
+            </summary>
+        </member>
+    </members>
+</doc>

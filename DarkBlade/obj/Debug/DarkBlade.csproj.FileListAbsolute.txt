@@ -1,0 +1,14 @@
+C:\Documents and Settings\user\My Documents\Visual Studio 2008\Projects\DarkBlade\DarkBlade\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\user\My Documents\Visual Studio 2008\Projects\DarkBlade\DarkBlade\obj\Debug\wndMain.baml
+C:\Documents and Settings\user\My Documents\Visual Studio 2008\Projects\DarkBlade\DarkBlade\obj\Debug\wndMain.g.cs
+C:\Documents and Settings\user\My Documents\Visual Studio 2008\Projects\DarkBlade\DarkBlade\obj\Debug\App.g.cs
+C:\Documents and Settings\user\My Documents\Visual Studio 2008\Projects\DarkBlade\DarkBlade\obj\Debug\DarkBlade_MarkupCompile.cache
+C:\Documents and Settings\user\My Documents\Visual Studio 2008\Projects\DarkBlade\DarkBlade\obj\Debug\DarkBlade.g.resources
+C:\Documents and Settings\user\My Documents\Visual Studio 2008\Projects\DarkBlade\DarkBlade\obj\Debug\DarkBlade.Properties.Resources.resources
+C:\Documents and Settings\user\My Documents\Visual Studio 2008\Projects\DarkBlade\DarkBlade\obj\Debug\DarkBlade.csproj.GenerateResource.Cache
+C:\Documents and Settings\user\My Documents\Visual Studio 2008\Projects\DarkBlade\DarkBlade\bin\Debug\DarkBlade.exe
+C:\Documents and Settings\user\My Documents\Visual Studio 2008\Projects\DarkBlade\DarkBlade\bin\Debug\DarkBlade.pdb
+C:\Documents and Settings\user\My Documents\Visual Studio 2008\Projects\DarkBlade\DarkBlade\bin\Debug\SQLiteWrapper.dll
+C:\Documents and Settings\user\My Documents\Visual Studio 2008\Projects\DarkBlade\DarkBlade\bin\Debug\SQLiteWrapper.xml
+C:\Documents and Settings\user\My Documents\Visual Studio 2008\Projects\DarkBlade\DarkBlade\obj\Debug\DarkBlade.exe
+C:\Documents and Settings\user\My Documents\Visual Studio 2008\Projects\DarkBlade\DarkBlade\obj\Debug\DarkBlade.pdb
