@@ -10,6 +10,11 @@ class View::Skills
   attr_reader :skill_dots
   
   def add_components(app, character)
+    
+    app.flow do
+      app.caption "Skills"
+    end
+    
     SKILLS_BY_TYPE.each do |skills|
       app.stack :width => '33%' do
         skills.each do |skill|

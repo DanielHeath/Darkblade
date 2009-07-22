@@ -2,6 +2,7 @@ require File.dirname(__FILE__) + "/Model/Character.rb"
 require File.dirname(__FILE__) + "/Lib/Utils.rb"
 require File.dirname(__FILE__) + "/View/Attributes.rb"
 require File.dirname(__FILE__) + "/View/Skills.rb"
+require File.dirname(__FILE__) + "/View/Specializations.rb"
 
 APP_WIDTH = 750
 CHARACTER_FILE_EXTENSION = '.char'
@@ -44,6 +45,7 @@ class MainScreen < Shoes
     
     View::Attributes.instance.add_components(self, @character)
     View::Skills.instance.add_components(self, @character)
+    View::Specializations.instance.add_components(self, @character)
     
     character_changed
   end # index
@@ -53,6 +55,7 @@ class MainScreen < Shoes
     View::Attributes.instance.set_xp_spent @character.attrs_xp_cost
     View::Skills.instance.set_starting_points(@character.original_skills.starting_point_costs.inspect)
     View::Skills.instance.set_xp_spent @character.skills_xp_cost
+    View::Specializations.instance.set_xp_spent @character.specializations_xp_cost
   end
 
 end

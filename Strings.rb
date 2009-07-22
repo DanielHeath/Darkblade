@@ -18,4 +18,8 @@ module Strings
     "So far, this character has spent #{xp} xp on skills"
   end
   
+  def Strings.specializations_xp_spent(xp)
+    "So far, this character has spent #{xp} xp on skill specializations"
+  end
+  
 end

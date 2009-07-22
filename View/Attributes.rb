@@ -12,6 +12,10 @@ class View::Attributes
   attr_reader :attribute_dots
   
   def add_components(app, character)
+    app.flow do
+      app.caption "Attributes"
+    end
+    
     ATTRS_BY_TYPE.each do |attrs|
       app.stack :width => '33%' do
         attrs.each do |attrib|
