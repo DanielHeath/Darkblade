@@ -30,14 +30,11 @@ class MainScreen < Shoes
       end # Save
       
       button "Load" do
-        new = Character.load(ask_open_file)
+        new = Model::Character.load(ask_open_file)
         if new then
           @character = new
-          @attribute_labelled_dots.each do |attrib, dots|
-            dots.dots.original_value = @character.original_attrs[attrib]
-            dots.dots.final_value = @character.final_attrs[attrib]
-            character_changed
-          end # Set each of the dots values.
+          View::Attributes.instance.update(@character)
+          character_changed
           @character_name_edit.text = @character.name
         end # If loaded OK
       end # Load

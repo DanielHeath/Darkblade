@@ -12,6 +12,9 @@ class View::Attributes
   attr_reader :attribute_dots
   
   def add_components(app, character)
+    @app, @character = app, character
+    @labelled_dots = {}
+    
     app.flow do
       app.caption "Attributes"
     end
@@ -24,7 +27,7 @@ class View::Attributes
             character.final_attrs[attrib] = dots.final_value
             app.character_changed
           end
-          app.attribute_labelled_dots[attrib] = current
+          @labelled_dots[attrib] = current
         end
       end
     end
@@ -33,8 +36,19 @@ class View::Attributes
       @starting_attr_values = app.para ''  
       @attrs_xp_spent = app.para ''
     end
-    
   end
+  
+  def update(character)
+    @labelled_dots.each do |attrib, ld|
+      ld.dots.original_value = character.original_attrs[attrib]
+      ld.dots.final_value = character.final_attrs[attrib]
+      ld.dots.on_changed do |dots|
+        character.original_attrs[attrib] = dots.original_value
+        character.final_attrs[attrib] = dots.final_value
+        @app.character_changed
+      end # New onchanged event to use new character.
+    end # each labelled_dots control
+  end # update(character)
   
   def set_starting_points(starting_points)
     @starting_attr_values.text = Strings.starting_attribute_points(starting_points)
