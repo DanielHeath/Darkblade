@@ -9,13 +9,10 @@ CHARACTER_FILE_EXTENSION = '.char'
 
 class MainScreen < Shoes
   url '/', :index
-  attr_reader :attribute_labelled_dots, :skill_labelled_dots
   
   def index
     background("background.jpg", :curve => 12)
     @character = Model::Character.new
-    @attribute_labelled_dots = {}
-    @skill_labelled_dots = {}
     
     flow do
       para "Name:"
@@ -34,8 +31,10 @@ class MainScreen < Shoes
         if new then
           @character = new
           View::Attributes.instance.update(@character)
-          character_changed
+          View::Skills.instance.update(@character)
+          View::Specializations.instance.update(@character)
           @character_name_edit.text = @character.name
+          character_changed
         end # If loaded OK
       end # Load
     end
@@ -43,7 +42,6 @@ class MainScreen < Shoes
     View::Attributes.instance.add_components(self, @character)
     View::Skills.instance.add_components(self, @character)
     View::Specializations.instance.add_components(self, @character)
-    
     character_changed
   end # index
 

@@ -12,22 +12,17 @@ class View::Attributes
   attr_reader :attribute_dots
   
   def add_components(app, character)
-    @app, @character = app, character
+    @app = app
     @labelled_dots = {}
     
     app.flow do
       app.caption "Attributes"
     end
     
-    ATTRS_BY_TYPE.each do |attrs|
+    ATTRS_BY_TYPE.each do |type|
       app.stack :width => '33%' do
-        attrs.each do |attrib|
-          current = app.labelled_dots attrib, 100, 1 do |dots|
-            character.original_attrs[attrib] = dots.original_value
-            character.final_attrs[attrib] = dots.final_value
-            app.character_changed
-          end
-          @labelled_dots[attrib] = current
+        type.each do |attrib|
+          @labelled_dots[attrib] = app.labelled_dots attrib, 1, :label_width => 100
         end
       end
     end
@@ -36,17 +31,21 @@ class View::Attributes
       @starting_attr_values = app.para ''  
       @attrs_xp_spent = app.para ''
     end
+    
+    update(character)
   end
   
   def update(character)
     @labelled_dots.each do |attrib, ld|
-      ld.dots.original_value = character.original_attrs[attrib]
-      ld.dots.final_value = character.final_attrs[attrib]
+      ld.dots.original_value = character.original_attrs[attrib] || 1
+      ld.dots.final_value = character.final_attrs[attrib] || 1
+      
       ld.dots.on_changed do |dots|
         character.original_attrs[attrib] = dots.original_value
         character.final_attrs[attrib] = dots.final_value
         @app.character_changed
       end # New onchanged event to use new character.
+      
     end # each labelled_dots control
   end # update(character)
   

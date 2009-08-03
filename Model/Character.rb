@@ -1,3 +1,4 @@
+require 'yaml'
 require File.dirname(__FILE__) + "/Attributes.rb"
 require File.dirname(__FILE__) + "/Skills.rb"
 require File.dirname(__FILE__) + "/Specializations.rb"
@@ -28,22 +29,16 @@ module Model
       @specializations.xp_cost
     end
     
-    
     def save(filename)
       if filename then
-        File.open(filename, File::CREAT|File::TRUNC|File::WRONLY) do |f|
-          Marshal.dump(self, f)
-        end
+        File.open(filename, File::CREAT|File::TRUNC|File::WRONLY) { |f| f.puts self.to_yaml }
       end
     end # save
     
     def Character.load(filename)
       result = nil
-      if filename then
-        File.open(filename, File::RDONLY) do |f|
-          data = f.read
-          result = Marshal.load(data)
-        end
+      if filename and (filename != '') then
+        result = YAML::load(File.open(filename, File::RDONLY))
       end
       result
     end # load

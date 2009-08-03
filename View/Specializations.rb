@@ -9,6 +9,8 @@ class View::Specializations
   include Singleton
   
   def add_components(app, character)
+    @app = app
+    
     app.flow do
       app.caption "Specializations"
     end
@@ -21,11 +23,16 @@ class View::Specializations
     app.stack do
       @specializations_xp_spent = app.para ''
     end
-    
+    update(character)
+  end
+  
+  def update(character)
     @add_specialization_button.click do
-      add_specialization_click(app, character)
+      add_specialization_click(@app, character)
     end
-    
+    character.specializations.each do |skill, specialization|
+      display_specialization(character, skill, specialization)
+    end
   end
   
   def set_xp_spent(xp)
@@ -41,19 +48,22 @@ class View::Specializations
     
     if not specializations.is_specialized(skill, specialization) then
       specializations.add_specialization(skill, specialization)
-      remover = nil # Create local variable here so it stays in scope
-      app.before(@add_specialization_button) do
-        app.flow do
-          app.para "Skilled at #{skill}, especially #{specialization}"
-          remover = app.button "Remove specialization"
-        end
+      display_specialization(character, skill, specialization)
+      @app.character_changed
+    end
+  end
+  
+  def display_specialization(character, skill, specialization)
+    remover = nil # Create local variable here so it stays in scope
+    @app.before(@add_specialization_button) do
+      @app.flow do
+        @app.para "Skilled at #{skill}, especially #{specialization}"
+        remover = @app.button "Remove specialization"
       end
-      remover.click do
-        character.specializations.remove_specialization(specialization, skill)
-        remover.parent.remove()
-      end
-      
-      app.character_changed
+    end
+    remover.click do
+      character.specializations.remove_specialization(skill, specialization)
+      remover.parent.remove()
     end
   end
   

@@ -21,4 +21,14 @@ class Model::Specializations < Array
     length * SPECIALIZATION_COST
   end
   
+  def each(&block)
+    if block and block.arity == 2 then
+      each do |e|
+        block.call(e[0], e[1])
+      end
+    else
+      super
+    end
+  end
+  
 end #class Specializations
