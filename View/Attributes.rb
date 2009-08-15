@@ -11,7 +11,7 @@ class View::Attributes
   include Singleton
   attr_reader :attribute_dots
   
-  def add_components(app, character)
+  def add_components(app)
     @app = app
     @labelled_dots = {}
     
@@ -31,8 +31,6 @@ class View::Attributes
       @starting_attr_values = app.para ''  
       @attrs_xp_spent = app.para ''
     end
-    
-    update(character)
   end
   
   def update(character)

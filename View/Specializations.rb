@@ -8,7 +8,7 @@ module View;end
 class View::Specializations
   include Singleton
   
-  def add_components(app, character)
+  def add_components(app)
     @app = app
     
     app.flow do
@@ -23,7 +23,6 @@ class View::Specializations
     app.stack do
       @specializations_xp_spent = app.para ''
     end
-    update(character)
   end
   
   def update(character)

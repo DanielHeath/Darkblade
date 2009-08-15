@@ -8,7 +8,7 @@ module View;end
 class View::Skills
   include Singleton
   
-  def add_components(app, character)
+  def add_components(app)
     @app = app
     
     app.flow do
@@ -17,7 +17,6 @@ class View::Skills
     
     @labelled_dots = {}
     
-
     SKILLS_BY_TYPE.each do |skills|
       app.stack :width => '33%' do
         skills.each do |skill|
@@ -25,14 +24,11 @@ class View::Skills
         end
       end
     end    
-
     
     app.stack do
       @starting_skill_values = app.para ''  
       @skills_xp_spent = app.para ''
     end
-    
-    update(character)
   end
   
   def update(character)
