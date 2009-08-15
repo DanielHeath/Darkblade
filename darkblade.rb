@@ -30,14 +30,15 @@ class MainScreen < Shoes
       end # Load
     end
     
-    View::Attributes.instance.add_components(self)
-    View::Skills.instance.add_components(self)
-    View::Specializations.instance.add_components(self)
+    view_objects.each do |view| 
+      view.add_components(self)
+    end
     
     set_character(character)
   end # index
   
   def character_changed
+    # Ugly; not yet sure how to simplify the mapping between these.
     View::Attributes.instance.set_starting_points(@character.original_attrs.starting_point_costs.inspect)
     View::Attributes.instance.set_xp_spent @character.attrs_xp_cost
     View::Skills.instance.set_starting_points(@character.original_skills.starting_point_costs.inspect)
@@ -49,9 +50,10 @@ private
 
   def set_character(character)
     @character = character
-    View::Attributes.instance.update(@character)
-    View::Skills.instance.update(@character)
-    View::Specializations.instance.update(@character)
+    view_objects.each do |view|
+      view.update(@character)
+    end
+    
     @character_name_edit.text = @character.name
     @save_button.click do
       @character.save(ask_save_file)
@@ -59,6 +61,18 @@ private
     character_changed
   end
 
+  def view_objects
+    # Next iteration:
+    [#View::Header.instance, (replace current inline header, add background/concept)
+    #View::Faction.instance, (mortal, mage path, vampire clan, werewolf ??)
+    #View::Nature.instance, (virtue/vice)
+    View::Attributes.instance,
+    View::Skills.instance,
+    View::Specializations.instance
+    #,View::Merits.instance (to support merits - going to be the most complex, methinks.)
+    ]
+  end
+  
 end
 
 Shoes.app :title => "Darkblade", :width => APP_WIDTH, :height => 800
