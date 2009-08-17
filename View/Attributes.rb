@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + "/../Model/Attributes.rb"
 require File.dirname(__FILE__) + "/../Lib/Utils.rb"
 require File.dirname(__FILE__) + "/Controls/LabelledDots.rb"
-require File.dirname(__FILE__) + "/../Rules.rb"
+require File.dirname(__FILE__) + "/../Model/Rules/Attributes.rb"
 require File.dirname(__FILE__) + "/../Strings.rb"
 require 'singleton'
 

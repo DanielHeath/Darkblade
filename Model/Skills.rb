@@ -1,5 +1,5 @@
 require File.dirname(__FILE__) + "/../Lib/Utils.rb"
-require File.dirname(__FILE__) + "/../Rules.rb"
+require File.dirname(__FILE__) + "/Rules/Skills.rb"
 
 module Model;end
 
@@ -28,7 +28,7 @@ class Model::Skills
   end
   
   def valid_starting_skills
-    starting_point_costs.sort == [11, 7, 3].sort
+    starting_point_costs.sort == SKILL_STARTING_POINTS.sort
   end
   
   def starting_point_costs

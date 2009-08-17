@@ -1,5 +1,5 @@
 require File.dirname(__FILE__) + "/../Lib/Utils.rb"
-require File.dirname(__FILE__) + "/../Rules.rb"
+require File.dirname(__FILE__) + "/Rules/Attributes.rb"
 
 module Model;end
 
@@ -28,7 +28,7 @@ class Model::Attributes
   end
   
   def valid_starting_attributes
-    starting_point_costs.sort == [5, 4, 3].sort
+    starting_point_costs.sort == ATTRS_STARTING_POINTS.sort
   end
   
   def starting_point_costs

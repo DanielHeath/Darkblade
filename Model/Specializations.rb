@@ -1,5 +1,5 @@
 require File.dirname(__FILE__) + "/../Lib/Utils.rb"
-require File.dirname(__FILE__) + "/../Rules.rb"
+require File.dirname(__FILE__) + "/Rules/Skills.rb"
 
 module Model;end
 
@@ -19,6 +19,10 @@ class Model::Specializations < Array
   
   def xp_cost
     length * SPECIALIZATION_COST
+  end
+  
+  def [](skill)
+    select {|e| e[0] == skill}.collect {|e| e[1]}
   end
   
   def each(&block)
