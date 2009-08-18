@@ -1,5 +1,5 @@
-require File.dirname(__FILE__) + "/../Lib/Utils.rb"
-require File.dirname(__FILE__) + "/Rules/Attributes.rb"
+require File.dirname(__FILE__) + "/../../Lib/Utils.rb"
+require File.dirname(__FILE__) + "/../../Config/Attributes.rb"
 
 module Model;end
 

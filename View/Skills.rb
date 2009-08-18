@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + "/../Model/Skills.rb"
+require File.dirname(__FILE__) + "/../Model/Character/Skills.rb"
 require File.dirname(__FILE__) + "/../Lib/Utils.rb"
 require File.dirname(__FILE__) + "/Controls/LabelledDots.rb"
 require 'singleton'

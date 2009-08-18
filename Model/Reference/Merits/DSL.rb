@@ -1,5 +1,6 @@
 require 'Prerequisites.rb'
 require 'Merits.rb'
+MERITS_CONFIG = File.dirname(__FILE__) + "/../../../Config/Merits.rb"
 
 module Reference; end;
 
@@ -51,4 +52,4 @@ def prerequisite_one_of()
   @last = llast
 end
 
-load File.dirname(__FILE__) + "/../Rules/Merits.rb"
+load MERITS_CONFIG

@@ -1,6 +1,6 @@
-require File.dirname(__FILE__) + "/../Model/Specializations.rb"
+require File.dirname(__FILE__) + "/../Model/Character/Specializations.rb"
 require File.dirname(__FILE__) + "/../Lib/Utils.rb"
-require File.dirname(__FILE__) + "/../Model/Rules/Skills.rb"
+require File.dirname(__FILE__) + "/../Config/Skills.rb"
 require 'singleton'
 
 module View;end

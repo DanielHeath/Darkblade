@@ -1,5 +1,4 @@
 Future features:
 
-Automated testing
-Skill Specialisations
-Inform user when starting points is correct
+Automated testing - looks like shoes doesn't make this easy.
+Merits

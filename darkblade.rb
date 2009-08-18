@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + "/Model/Character.rb"
+require File.dirname(__FILE__) + "/Model/Character/Character.rb"
 require File.dirname(__FILE__) + "/Lib/Utils.rb"
 require File.dirname(__FILE__) + "/View/Attributes.rb"
 require File.dirname(__FILE__) + "/View/Skills.rb"
