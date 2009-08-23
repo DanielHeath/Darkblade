@@ -62,12 +62,12 @@ class Shoes::Ndots < Shoes::Widget
   end
   
   def valid_value?(value)
-    valid_values === value
+    valid_values.include? value
   end
   
   def create_dot(index)
     res = onedot
-    res.enabled = valid_values.include? index
+    res.enabled = valid_value? index
     res.on_changed do |dot|
       valid_value!(index)
       

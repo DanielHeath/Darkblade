@@ -4,7 +4,7 @@ class Shoes::Labelled_dots < Shoes::Widget
   attr_reader :label, :dots
 
   def initialize(label, default_value, opts = {}, &block)
-    @label_text = label.to_s.capitalize.gsub '_', ' '
+    @label_text = label.to_s
     stack :width => (opts[:label_width] || 100) do
       @label = para @label_text + ':'
     end
