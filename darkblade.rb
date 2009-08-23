@@ -3,6 +3,8 @@ require File.dirname(__FILE__) + "/Lib/Utils.rb"
 require File.dirname(__FILE__) + "/View/Attributes.rb"
 require File.dirname(__FILE__) + "/View/Skills.rb"
 require File.dirname(__FILE__) + "/View/Specializations.rb"
+require File.dirname(__FILE__) + "/View/Merits.rb"
+
 
 APP_WIDTH = 750
 CHARACTER_FILE_EXTENSION = '.char'
@@ -68,9 +70,8 @@ private
     #View::Nature.instance, (virtue/vice)
     View::Attributes.instance,
     View::Skills.instance,
-    View::Specializations.instance
-    #,View::Merits.instance (to support merits - going to be the most complex, methinks.)
-    ]
+    View::Specializations.instance,
+    View::Merits.instance]
   end
   
 end

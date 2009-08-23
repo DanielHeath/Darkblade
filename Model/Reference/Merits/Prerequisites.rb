@@ -1,4 +1,4 @@
-require 'Merits.rb'
+require File.dirname(__FILE__) + "/Merits.rb"
 module Reference; end;
 
 class Reference::Prerequisite

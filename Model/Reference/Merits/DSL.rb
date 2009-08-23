@@ -1,27 +1,37 @@
-require 'Prerequisites.rb'
-require 'Merits.rb'
+require File.dirname(__FILE__) + "/Prerequisites.rb"
+require File.dirname(__FILE__) + "/Merits.rb"
+
 MERITS_CONFIG = File.dirname(__FILE__) + "/../../../Config/Merits.rb"
 
 module Reference; end;
 
+def new_merit(merit, type, valid_costs, options = {})
+  # If the last merit was declared as specialized, make 10 copies.
+  # to support specializing multiple times. 
+  # Ugly, but I don't want to waste UI space for the 3 merits that use it.
+  if @last and @last_specialized then
+    (1..9).each do |i|
+      new = Reference::Merit.new(@last.name.to_s + i.to_s, @last.type, @last.costs)
+      @last.prereqs.each do |p|
+        new.add_prerequisite p
+      end # each prereq
+    end # 1 to 9
+  end # If the previous merit was specialized
+  
+  @last = Reference::Merit.new(merit, type, valid_costs)
+  @last_specialized = options[:specialized]
+end
+
 def mental(merit, valid_costs, options = {})
-  @last = @last_merit = Reference::Merit.new(merit, :mental, valid_costs, options[:specialized])
-  @last_specialization = nil
+  new_merit merit, :mental, valid_costs, options
 end
 
 def physical(merit, valid_costs, options = {})
-  @last = @last_merit = Reference::Merit.new(merit, :physical, valid_costs, options[:specialized])
-  @last_specialization = nil
+  new_merit merit, :physical, valid_costs, options
 end
 
 def social(merit, valid_costs, options = {})
-  @last = @last_merit = Reference::Merit.new(merit, :social, valid_costs, options[:specialized])
-  @last_specialization = nil
-end
-
-def specialization(name)
-  @last = @last_specialization = Reference::Specialization.new(name)
-  @last_merit.default_specializations.push @last_specialization
+  new_merit merit, :social, valid_costs, options
 end
 
 def prerequisite_attribute(attr, value)

@@ -1,5 +1,5 @@
 require File.dirname(__FILE__) + "/../../Lib/Utils.rb"
-require File.dirname(__FILE__) + "/../Reference/DSL.rb"
+require File.dirname(__FILE__) + "/../Reference/Merits/DSL.rb"
 
 module Model;end
 
@@ -13,24 +13,28 @@ class Model::Merits
     end # Each skill
   end # Initialize
   
-  def [](merit)
-    raise 'not implemented 1'
+  def each(&block)
+    @vals.each {|k, v| block.call(k, v)}
   end
   
-  def []=(merit, dots)
-    raise 'not implemented 2'
+  def [](merit)
+    @vals[ref_merit]
+  end
+  
+  def []=(ref_merit, dots)
+    @vals[ref_merit] = dots
   end
   
   def valid_starting_merits
-    raise 'not implemented 3'
+    starting_point_cost == MERIT_STARTING_POINTS
   end
   
   def starting_point_cost
-    raise 'not implemented 4'
+    @vals.values.sum {|dots| MERIT_STARTING_POINT_COST[dots]}
   end
   
   def xp_cost
-    raise 'not implemented 5'
+    @vals.values.sum {|dots| MERIT_XP_COSTS[dots]}
   end
   
 end #class Specializations
