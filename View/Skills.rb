@@ -20,10 +20,10 @@ class View::Skills
     SKILLS_BY_TYPE.each do |skills|
       app.stack :width => '33%' do
         skills.each do |skill|
-          @labelled_dots[skill] = app.labelled_dots skill, 0, :label_width => 100
+          @labelled_dots[skill] = app.labelled_dots skill, 0
         end
       end
-    end    
+    end
     
     app.stack do
       @starting_skill_values = app.para ''  

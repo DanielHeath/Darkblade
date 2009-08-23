@@ -2,3 +2,7 @@ Future features:
 
 Automated testing - looks like shoes doesn't make this easy.
 Merits
+
+I feel like I should really invert the namespace, like I've gotten it backwards.
+Instead of Reference::Merits Model::Merits and Reference::Skills, it should be Skills::Reference, Merits::Model and Merits::Reference 
+Have to think about this one.

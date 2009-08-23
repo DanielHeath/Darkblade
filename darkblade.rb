@@ -46,6 +46,8 @@ class MainScreen < Shoes
     View::Skills.instance.set_starting_points(@character.original_skills.starting_point_costs.inspect)
     View::Skills.instance.set_xp_spent @character.skills_xp_cost
     View::Specializations.instance.set_xp_spent @character.specializations_xp_cost
+    View::Merits.instance.set_starting_points @character.original_merits.starting_point_cost
+    View::Merits.instance.set_xp_spent @character.merits_xp_cost
   end
 
 private
@@ -64,7 +66,7 @@ private
   end
 
   def view_objects
-    # Next iteration:
+    # Coming Soon...
     [#View::Header.instance, (replace current inline header, add background/concept)
     #View::Faction.instance, (mortal, mage path, vampire clan, werewolf ??)
     #View::Nature.instance, (virtue/vice)
@@ -76,4 +78,4 @@ private
   
 end
 
-Shoes.app :title => "Darkblade", :width => APP_WIDTH, :height => 800
+Shoes.app :title => "Darkblade", :width => APP_WIDTH, :height => 1024

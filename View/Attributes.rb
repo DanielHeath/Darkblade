@@ -22,7 +22,7 @@ class View::Attributes
     ATTRS_BY_TYPE.each do |type|
       app.stack :width => '33%' do
         type.each do |attrib|
-          @labelled_dots[attrib] = app.labelled_dots attrib, 1, :label_width => 100
+          @labelled_dots[attrib] = app.labelled_dots attrib, 1
         end
       end
     end

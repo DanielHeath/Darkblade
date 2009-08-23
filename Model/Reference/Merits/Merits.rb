@@ -12,6 +12,10 @@ class Reference::Merit
     @@merits
   end
   
+  def self.find_by_name(name)
+    @@merits.detect {|m| m.name == name}
+  end
+  
   def initialize(name, type, costs)
     @name, @type, @costs = name, type, costs
     @prereqs = []

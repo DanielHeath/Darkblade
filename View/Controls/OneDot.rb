@@ -1,5 +1,6 @@
 # A switch with three selection states. 
 # By default, it can only move up in selection states (order = deselected -> final -> original) - other behavior is created using the onchange event.
+# It can also be disabled, which prevents the user from selecting or triggering events.
 
 LEFT_BUTTON = [1]
 RIGHT_BUTTON = [2, 3]
@@ -7,6 +8,7 @@ RIGHT_BUTTON = [2, 3]
 OvalWidth = 12
 OvalHeight = 14
 
+DisabledColor = "#000000"
 OutlineColor = "#000000"
 OutlineWidth = 2
 
@@ -35,13 +37,13 @@ class Shoes::Onedot < Shoes::Widget
     end # within a flow
   end # initialize
 
-  def on_changed(&block)
-    @on_changed = block
-  end
-  
   def enabled=(val)
     @enabled = val
     changed
+  end
+
+  def on_changed(&block)
+    @on_changed = block
   end
   
   def set_selection_without_onchange(original, final)
@@ -104,7 +106,15 @@ class Shoes::Onedot < Shoes::Widget
   end
     
   def fill_color
-    original_selected ? original_selected_color : (final_selected ? final_selected_color : deselected_color)
+    if @enabled then
+      if original_selected then
+        original_selected_color
+      else
+        final_selected ? final_selected_color : deselected_color
+      end
+    else
+      DisabledColor
+    end
   end
     
   def fill_dot

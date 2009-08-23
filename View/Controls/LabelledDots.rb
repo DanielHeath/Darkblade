@@ -14,4 +14,8 @@ class Shoes::Labelled_dots < Shoes::Widget
     end
   end
   
+  def on_changed(&block)
+    dots.on_changed(&block)
+  end
+  
 end

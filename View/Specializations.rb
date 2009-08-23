@@ -58,8 +58,10 @@ class View::Specializations
       @app.flow do
         @app.para "Skilled at #{skill}, especially #{specialization}"
         remover = @app.button "Remove specialization"
+        @app.ndots 5, 2, 4, [2, 4, 5]
       end
     end
+    
     remover.click do
       character.specializations.remove_specialization(skill, specialization)
       remover.parent.remove()

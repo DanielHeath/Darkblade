@@ -4,7 +4,7 @@ require File.dirname(__FILE__) + "/Config/Costs.rb"
 module Strings
 
   def Strings.starting_attribute_points(starting_points)
-    "Starting attribute points spent are #{starting_points}. You may use #{ATTRS_STARTING_POINTS} in any order."
+    "Starting attribute points spent are #{starting_points}. You may use #{ATTRS_STARTING_POINTS.inspect} in any order."
   end
   
   def Strings.attribute_xp_spent(xp)
@@ -12,7 +12,7 @@ module Strings
   end
 
   def Strings.starting_skill_points(starting_points)
-    "Starting skill points spent are #{starting_points}. You may use #{SKILL_STARTING_POINTS} in any order."
+    "Starting skill points spent are #{starting_points}. You may use #{SKILL_STARTING_POINTS.inspect} in any order."
   end
   
   def Strings.skill_xp_spent(xp)

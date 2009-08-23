@@ -1,12 +1,13 @@
 require File.dirname(__FILE__) + "/OneDot.rb"
 
 class Shoes::Ndots < Shoes::Widget
+  attr_reader :original_value, :final_value
   
-  def initialize(dots, original, final, valid = nil)
-    @valid = valid || (0..dots)
-    
+  def initialize(dots, original, final, enabled_dots = nil)
     @num_dots = dots
-    @values = {:original => original, :final => final}
+    @enabled_dots = enabled_dots || ((1..dots).to_a - [2])
+    @original_value = original
+    @final_value = final
     @dots = []
     dot_indices.each do |i|
       @dots[i-1] = create_dot(i)
@@ -20,14 +21,6 @@ class Shoes::Ndots < Shoes::Widget
     @on_changed = block
   end
   
-  def original_value
-    @values[:original]
-  end
-  
-  def final_value
-    @values[:final]
-  end
-  
   def original_value=(orig_value)
     valid_value!(orig_value)
     privsetvalue(:original, orig_value)
@@ -38,8 +31,8 @@ class Shoes::Ndots < Shoes::Widget
     privsetvalue(:final, final_value)
   end
   
-  private
-  
+private
+
   def dots(index)
     # the first dot indicates 1, the second 2 etc - so it makes more sense to use a 1-based index.
     @dots[index-1]
@@ -50,11 +43,11 @@ class Shoes::Ndots < Shoes::Widget
   end
   
   def valid_values
-    @valid.to_a
+    (0..@num_dots).to_a
   end
   
   def dot_indices
-    (1..@num_dots)
+    (1..@num_dots).to_a
   end
   
   def valid_value!(value)
@@ -67,12 +60,13 @@ class Shoes::Ndots < Shoes::Widget
   
   def create_dot(index)
     res = onedot
-    res.enabled = valid_value? index
+    res.enabled = @enabled_dots.to_a.include? index
     res.on_changed do |dot|
       valid_value!(index)
       
-      # The first dot acts as a toggle; the others can't be unset by clicking them directly.
-      if (index == 1) && (@values[dot.last_click] == 1) then
+      # The first valid dot acts as a toggle; the others can't be unset by clicking them directly.
+      if (index == values(dot.last_click)) and
+         (index == minimum_enabled) then
         privsetvalue dot.last_click, 0
       else
         privsetvalue dot.last_click, index
@@ -82,19 +76,32 @@ class Shoes::Ndots < Shoes::Widget
     res
   end
   
+  def minimum_enabled
+    (@enabled_dots.to_a - [0]).min
+  end
+  
+  def values(symbol)
+    if symbol == :original then
+      @original_value
+    else
+      @final_value
+    end
+  end
+  
+  
 public
   # I need to find a better way to do this awful hack. 
   def privsetvalue(val_type, new_value)
     if val_type == :original then
-      @values[:original] = new_value
-      @values[:final] = new_value if (new_value > @values[:final])
+      @original_value = new_value
+      @final_value = new_value if (new_value > @final_value)
     elsif val_type == :final
-      @values[:final] = new_value
-      @values[:original] = new_value if (new_value < @values[:original])
+      @final_value = new_value
+      @original_value = new_value if (new_value < @original_value)
     end
     
-    valid_values.each do |i|
-      dots(i).set_selection_without_onchange(i <= @values[:original], i <= @values[:final])
+    dot_indices.each do |i|
+      dots(i).set_selection_without_onchange(i <= @original_value, i <= @final_value)
     end
   end
   

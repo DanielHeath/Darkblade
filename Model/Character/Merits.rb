@@ -7,22 +7,18 @@ class Model::Merits
   
   def initialize
     @vals = {}
-    SKILLS.each do |skill|
-      # Initialize the skill
-      @vals[skill] = 0
-    end # Each skill
   end # Initialize
   
   def each(&block)
     @vals.each {|k, v| block.call(k, v)}
   end
   
-  def [](merit)
-    @vals[ref_merit]
+  def [](name_or_ref)
+    @vals[ref_merit(name_or_ref)] || 0
   end
   
-  def []=(ref_merit, dots)
-    @vals[ref_merit] = dots
+  def []=(name_or_ref, dots)
+    @vals[ref_merit(name_or_ref)] = dots
   end
   
   def valid_starting_merits
@@ -34,7 +30,17 @@ class Model::Merits
   end
   
   def xp_cost
-    @vals.values.sum {|dots| MERIT_XP_COSTS[dots]}
+    @vals.values.collect {|dots| MERIT_XP_COSTS[dots]}.sum
+  end
+  
+  private
+  
+  def ref_merit(name_or_ref)
+    if name_or_ref.kind_of? Reference::Merit then
+      name_or_ref
+    else
+      Reference::Merit.find_by_name(name_or_ref)
+    end
   end
   
 end #class Specializations
