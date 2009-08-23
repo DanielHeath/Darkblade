@@ -10,12 +10,12 @@ OvalHeight = 14
 OutlineColor = "#000000"
 OutlineWidth = 2
 
-
 class Shoes::Onedot < Shoes::Widget
-  attr_reader :last_click
+  attr_reader :last_click, :enabled
   
   def initialize(opts = {})
     super()
+    @enabled = true
     @last_click = :original
     @selected = opts[:selected]
     @selected_color = opts[:selected_color]
@@ -37,6 +37,11 @@ class Shoes::Onedot < Shoes::Widget
 
   def on_changed(&block)
     @on_changed = block
+  end
+  
+  def enabled=(val)
+    @enabled = val
+    changed
   end
   
   def set_selection_without_onchange(original, final)
@@ -107,7 +112,7 @@ class Shoes::Onedot < Shoes::Widget
   end
   
   def changed
-    @on_changed.call(self) if @on_changed
+    @on_changed.call(self) if @on_changed and @enabled
     fill_dot
   end
   

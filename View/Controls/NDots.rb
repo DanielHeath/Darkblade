@@ -2,7 +2,9 @@ require File.dirname(__FILE__) + "/OneDot.rb"
 
 class Shoes::Ndots < Shoes::Widget
   
-  def initialize(dots, original, final)
+  def initialize(dots, original, final, valid = nil)
+    @valid = valid || (0..dots)
+    
     @num_dots = dots
     @values = {:original => original, :final => final}
     @dots = []
@@ -48,7 +50,7 @@ class Shoes::Ndots < Shoes::Widget
   end
   
   def valid_values
-    (0..@num_dots)
+    @valid.to_a
   end
   
   def dot_indices
@@ -65,6 +67,7 @@ class Shoes::Ndots < Shoes::Widget
   
   def create_dot(index)
     res = onedot
+    res.enabled = valid_values.include? index
     res.on_changed do |dot|
       valid_value!(index)
       
