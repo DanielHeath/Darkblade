@@ -5,7 +5,7 @@ class Shoes::Ndots < Shoes::Widget
   
   def initialize(dots, original, final, enabled_dots = nil)
     @num_dots = dots
-    @enabled_dots = enabled_dots || ((1..dots).to_a - [2])
+    @enabled_dots = enabled_dots || ((1..dots).to_a)
     @original_value = original
     @final_value = final
     @dots = []
