@@ -1,33 +1,35 @@
 require File.dirname(__FILE__) + "/../Model/Character/Skills.rb"
 require File.dirname(__FILE__) + "/../Lib/Utils.rb"
 require File.dirname(__FILE__) + "/Controls/LabelledDots.rb"
+require File.dirname(__FILE__) + "/Base.rb"
 require 'singleton'
 
 module View;end
 
-class View::Skills
+class View::Skills < View::Base
   include Singleton
   
+  def add_caption(app)
+    super
+    @caption.text = "Skills"
+  end
+  
   def add_components(app)
-    @app = app
-    
-    app.flow do
-      app.caption "Skills"
-    end
-    
+    super
     @labelled_dots = {}
-    
-    SKILLS_BY_TYPE.each do |skills|
-      app.stack :width => '33%' do
-        skills.each do |skill|
-          @labelled_dots[skill] = app.labelled_dots skill, 0
+    @content = @app.flow do
+      SKILLS_BY_TYPE.each do |skills|
+        @app.stack :width => '33%' do
+          skills.each do |skill|
+            @labelled_dots[skill] = @app.labelled_dots skill, 0
+          end
         end
       end
-    end
-    
-    app.stack do
-      @starting_skill_values = app.para ''  
-      @skills_xp_spent = app.para ''
+      
+      @app.stack do
+        @starting_skill_values = @app.para ''  
+        @skills_xp_spent = @app.para ''
+      end
     end
   end
   

@@ -1,27 +1,32 @@
 require File.dirname(__FILE__) + "/../Model/Character/Specializations.rb"
 require File.dirname(__FILE__) + "/../Lib/Utils.rb"
 require File.dirname(__FILE__) + "/../Config/Skills.rb"
+require File.dirname(__FILE__) + "/Base.rb"
 require 'singleton'
 
 module View;end
 
-class View::Specializations
+class View::Specializations < View::Base
   include Singleton
   
+  def add_caption(app)
+    super
+    @caption.text = "Specializations"
+  end
+  
   def add_components(app)
-    @app = app
-    
-    app.flow do
-      app.caption "Specializations"
-    end
-    @add_specialization_button = app.button "Add Skill Specialization" 
-    
-    @new_specialization_edit = app.edit_line
-    @new_specialization_edit.text = "Name of specialization"
-    @skill_list_box = app.list_box :items => SKILLS, :choose => SKILLS[0]
-    
-    app.stack do
-      @specializations_xp_spent = app.para ''
+    super
+    @content = @app.flow do
+      @new_container = @app.flow do
+        @add_specialization_button = app.button "Add Skill Specialization" 
+        @new_specialization_edit = app.edit_line
+        @new_specialization_edit.text = "Name of specialization"
+        @skill_list_box = app.list_box :items => SKILLS, :choose => SKILLS[0]
+      end
+      
+      app.stack do
+        @specializations_xp_spent = app.para ''
+      end
     end
   end
   
@@ -36,6 +41,22 @@ class View::Specializations
   
   def set_xp_spent(xp)
     @specializations_xp_spent.text = Strings.specializations_xp_spent(xp)
+  end
+  
+  def show
+    @displays.each {|f| f.show }
+    super
+  end
+  
+  def hide
+    @displays.each {|f| f.hide }
+    super
+  end
+  
+  protected
+  
+  def initialize
+    @displays = []
   end
   
   private
@@ -53,16 +74,17 @@ class View::Specializations
   end
   
   def display_specialization(character, skill, specialization)
-    remover = nil # Create local variable here so it stays in scope
-    @app.before(@add_specialization_button) do
-      @app.flow do
+    remover = nil # Create local variable here so it stays in scope    
+    @app.before(@new_container) do
+      @displays.push(@app.flow do
         @app.para "Skilled at #{skill}, especially #{specialization}"
         remover = @app.button "Remove specialization"
-      end
+      end)
     end
     
     remover.click do
       character.specializations.remove_specialization(skill, specialization)
+      @displays.remove remover.parent
       remover.parent.remove()
       @app.character_changed
     end

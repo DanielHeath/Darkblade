@@ -3,33 +3,38 @@ require File.dirname(__FILE__) + "/../Lib/Utils.rb"
 require File.dirname(__FILE__) + "/Controls/LabelledDots.rb"
 require File.dirname(__FILE__) + "/../Config/Attributes.rb"
 require File.dirname(__FILE__) + "/../Strings.rb"
+require File.dirname(__FILE__) + "/Base.rb"
 require 'singleton'
 
 module View;end
 
-class View::Attributes
+class View::Attributes < View::Base
   include Singleton
   attr_reader :attribute_dots
   
+  def add_caption(app)
+    super
+    @caption.text = "Attributes"
+  end
+  
   def add_components(app)
-    @app = app
+    super
     @labelled_dots = {}
-    
-    app.flow do
-      app.caption "Attributes"
-    end
-    
-    ATTRS_BY_TYPE.each do |type|
-      app.stack :width => '33%' do
-        type.each do |attrib|
-          @labelled_dots[attrib] = app.labelled_dots attrib, 1
+    @content = @app.stack do
+      @app.flow do
+        ATTRS_BY_TYPE.each do |type|
+          @app.stack :width => '33%' do
+            type.each do |attrib|
+              @labelled_dots[attrib] = @app.labelled_dots attrib, 1
+            end
+          end
         end
       end
-    end
-    
-    app.stack do
-      @starting_attr_values = app.para ''  
-      @attrs_xp_spent = app.para ''
+      
+      app.stack do
+        @starting_attr_values = @app.para ''  
+        @attrs_xp_spent = @app.para ''
+      end
     end
   end
   

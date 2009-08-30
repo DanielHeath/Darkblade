@@ -36,6 +36,13 @@ module Model
       @final_merits.xp_cost - @original_merits.xp_cost
     end
     
+    def names_of_merits
+      res = []
+      @original_merits.each { |ref, dots| res.push ref.name }
+      @final_merits.each { |ref, dots| res.push ref.name }
+      res.uniq
+    end
+    
     def save(filename)
       if filename then
         File.open(filename, File::CREAT|File::TRUNC|File::WRONLY) { |f| f.puts self.to_yaml }

@@ -13,7 +13,7 @@ class MainScreen < Shoes
   url '/', :index
   
   def index
-    background("background.png", :curve => 12)
+    background("background.jpg", :curve => 12)
     character = Model::Character.new
     
     flow do
@@ -32,9 +32,17 @@ class MainScreen < Shoes
       end # Load
     end
     
+    flow :width => '100%' do
+      background bisque
+      view_objects.each do |view| 
+        view.add_caption(self)
+      end
+    end
     view_objects.each do |view| 
       view.add_components(self)
     end
+    
+    set_tab View::Attributes.instance
     
     set_character(character)
   end # index
@@ -50,6 +58,13 @@ class MainScreen < Shoes
     View::Merits.instance.set_xp_spent @character.merits_xp_cost
   end
 
+  def set_tab(current_view)
+    view_objects.each do |view| 
+      view.hide
+    end
+    current_view.show
+  end
+  
 private
 
   def set_character(character)
@@ -78,4 +93,4 @@ private
   
 end
 
-Shoes.app :title => "Darkblade", :width => APP_WIDTH, :height => 1024
+Shoes.app :title => "Darkblade", :width => APP_WIDTH, :height => 600

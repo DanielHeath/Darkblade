@@ -22,7 +22,7 @@ class Model::Merits
   end
   
   def valid_starting_merits
-    starting_point_cost == MERIT_STARTING_POINTS
+    starting_point_cost <= MERIT_STARTING_POINTS
   end
   
   def starting_point_cost
