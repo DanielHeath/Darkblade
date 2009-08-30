@@ -13,7 +13,7 @@ class MainScreen < Shoes
   url '/', :index
   
   def index
-    background("background.jpg", :curve => 12)
+    background(File.dirname(__FILE__) + "/View/Resources/background.png", :curve => 12)
     character = Model::Character.new
     
     flow do

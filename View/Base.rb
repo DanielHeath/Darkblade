@@ -22,7 +22,9 @@ class View::Base
   end
   
   def hide
-    @content.hide
+    # Sometimes @content gets assigned something else. 
+    # No idea how, something is doing some wierdness.
+    @content.hide()
     @caption.style :stroke => @app.black
   end
   

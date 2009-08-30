@@ -16,11 +16,9 @@ class View::Merits < View::Base
   
   def add_components(app)
     super
-    @content = @app.flow(:height => 100) do
-      @new_container = @app.flow do
-        @merits_dropdown = @app.list_box :items => Reference::Merit.merits.collect { |m| m.name }, :choose => Reference::Merit.merits.first.name
-        @add_merit_button = @app.button "Add Merit" 
-      end
+    @content = @app.flow do
+      @merits_dropdown = @app.list_box :items => Reference::Merit.merits.collect { |m| m.name }, :choose => Reference::Merit.merits.first.name
+      @add_merit_button = @app.button "Add Merit" 
       
       @app.stack do
         @starting_merit_values = @app.para 'blue'
@@ -71,34 +69,40 @@ class View::Merits < View::Base
   private
   
   def reset_merits_dropdown(character)
-    reference_merit_names = Reference::Merit.merits.collect { |m| m.name } 
-    items = reference_merit_names - character.names_of_merits
-    choose = items[0]
+    items = available_merit_names(character)
     @merits_dropdown.items = items
-    @merits_dropdown.choose = items[0]
+  end
+  
+  def available_merit_names(character)
+    Reference::Merit.merits.collect { |m| m.name } - character.names_of_merits
   end
   
   def add_merit(app, character)
     ref = Reference::Merit.find_by_name @merits_dropdown.text
+    # We have to call choose now, because after we change the items property it doesn't work properly until after a re-draw for some reason.
+    @merits_dropdown.choose((available_merit_names(character) - [@merits_dropdown.text])[0])
+    
+    add_character_merit(character, ref)
+    display_merit character, ref
+    reset_merits_dropdown character
+    @app.character_changed
+  end
+  
+  def add_character_merit(character, ref)
     min_dots = ref.costs.to_a.min
     character.original_merits[ref] = min_dots
     # The following line means that the app will not by default over-spend on starting points.
     character.original_merits[ref] = 0 if not character.original_merits.valid_starting_merits
     character.final_merits[ref] = min_dots
-    display_merit(character, ref)
-    reset_merits_dropdown character
-    @app.character_changed
   end
   
   def display_merit(character, ref)
     if not @displays[ref.name] then
-      @app.before(@new_container) do
-        @displays[ref.name] = @app.flow do
-          add_merit_controls(character, ref)
-        end # flow
-      end # Before button
+      @displays[ref.name] = @app.flow do
+        add_merit_controls(character, ref)
+      end # flow
     end # if not assigned
-    end # display_merit
+  end # display_merit
 
   def add_merit_controls(character, ref)
     @app.para ref.name + ":"

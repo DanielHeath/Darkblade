@@ -8,3 +8,4 @@ I feel like I should really invert the namespace, like I've gotten it backwards.
 Instead of Reference::Merits Model::Merits and Reference::Skills, it should be Skills::Reference, Merits::Model and Merits::Reference 
 Have to think about this one.
 
+Replace the ugly 'Remove specialization' buttons with some sort of 'red circle with a minus sign' button. Add a similar button to merits.
