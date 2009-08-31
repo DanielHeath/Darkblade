@@ -1,7 +1,7 @@
 # 
 # 
 
-class Shoes::InstructionEdit < Shoes::Widget
+class Shoes::Types::InstructionEdit < Shoes::Widget
   
   attr_reader :edit
   

@@ -12,7 +12,7 @@ DisabledColor = "#000000"
 OutlineColor = "#000000"
 OutlineWidth = 2
 
-class Shoes::Onedot < Shoes::Widget
+class Shoes::Types::Onedot < Shoes::Widget
   attr_reader :last_click, :enabled
   
   def initialize(opts = {})

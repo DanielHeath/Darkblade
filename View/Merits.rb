@@ -1,6 +1,9 @@
 require File.dirname(__FILE__) + "/../Model/Character/Merits.rb"
 require File.dirname(__FILE__) + "/../Lib/Utils.rb"
 require File.dirname(__FILE__) + "/../Model/Reference/Merits/Merits.rb"
+require File.dirname(__FILE__) + "/Controls/RemoveButton.rb"
+require File.dirname(__FILE__) + "/Controls/AddButton.rb"
+
 require File.dirname(__FILE__) + "/Base.rb"
 require 'singleton'
 
@@ -18,7 +21,7 @@ class View::Merits < View::Base
     super
     @content = @app.flow do
       @merits_dropdown = @app.list_box :items => Reference::Merit.merits.collect { |m| m.name }, :choose => Reference::Merit.merits.first.name
-      @add_merit_button = @app.button "Add Merit" 
+      @add_merit_button = @app.add_button
       
       @app.stack do
         @starting_merit_values = @app.para 'blue'
@@ -32,6 +35,7 @@ class View::Merits < View::Base
     @displays.each { |d| d.remove} if @displays
     
     @add_merit_button.click do
+      debug "Adding new merit"
       add_merit(@app, character) # Bind to the new character
     end
     
@@ -78,6 +82,7 @@ class View::Merits < View::Base
   end
   
   def add_merit(app, character)
+    return if not @merits_dropdown.text
     ref = Reference::Merit.find_by_name @merits_dropdown.text
     # We have to call choose now, because after we change the items property it doesn't work properly until after a re-draw for some reason.
     @merits_dropdown.choose((available_merit_names(character) - [@merits_dropdown.text])[0])
@@ -105,13 +110,24 @@ class View::Merits < View::Base
   end # display_merit
 
   def add_merit_controls(character, ref)
-    @app.para ref.name + ":"
-    ndots = @app.ndots ref.costs.to_a.max, character.original_merits[ref.name], character.final_merits[ref.name], ref.costs
-    ndots.on_changed do |dots|
-      character.original_merits[ref] = dots.original_value
-      character.final_merits[ref] = dots.final_value
-      @app.character_changed
-    end # On change for dots
+    @app.flow do
+      @app.remove_button do 
+        debug "Removing #{ref.name}"
+        character.original_merits.remove ref
+        character.final_merits.remove ref
+        @displays[ref.name].remove
+        reset_merits_dropdown character
+        @app.character_changed
+      end
+      
+      @app.para ref.name + ":"
+      ndots = @app.ndots ref.costs.to_a.max, character.original_merits[ref.name], character.final_merits[ref.name], ref.costs
+      ndots.on_changed do |dots|
+        character.original_merits[ref] = dots.original_value
+        character.final_merits[ref] = dots.final_value
+        @app.character_changed
+      end # On change for dots
+    end
   end # add_merit_controls
   
 end

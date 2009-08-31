@@ -33,6 +33,11 @@ class Model::Merits
     @vals.values.collect {|dots| MERIT_XP_COSTS[dots]}.sum
   end
   
+  def remove(name_or_ref)
+    @vals.delete ref_merit(name_or_ref)
+  end
+  
+  
   private
   
   def ref_merit(name_or_ref)

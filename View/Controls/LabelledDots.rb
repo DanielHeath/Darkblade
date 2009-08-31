@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + "/NDots.rb"
 
-class Shoes::Labelled_dots < Shoes::Widget
+class Shoes::Types::Labelled_dots < Shoes::Widget
   attr_reader :label, :dots
 
   def initialize(label, default_value, opts = {}, &block)

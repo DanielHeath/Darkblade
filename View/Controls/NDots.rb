@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + "/OneDot.rb"
 
-class Shoes::Ndots < Shoes::Widget
+class Shoes::Types::Ndots < Shoes::Widget
   attr_reader :original_value, :final_value
   
   def initialize(dots, original, final, enabled_dots = nil)
