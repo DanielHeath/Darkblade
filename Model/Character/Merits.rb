@@ -1,4 +1,3 @@
-require File.dirname(__FILE__) + "/../../Lib/Utils.rb"
 require File.dirname(__FILE__) + "/../Reference/Merits/DSL.rb"
 
 module Model;end

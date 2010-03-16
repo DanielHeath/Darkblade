@@ -1,4 +1,3 @@
-require 'yaml'
 require File.dirname(__FILE__) + "/Attributes.rb"
 require File.dirname(__FILE__) + "/Skills.rb"
 require File.dirname(__FILE__) + "/Specializations.rb"
