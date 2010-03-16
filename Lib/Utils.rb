@@ -21,3 +21,9 @@ class Object
    self.class.send(:define_method, name, &block)
   end
 end
+
+class Numeric
+  def to_a
+    [self]
+  end
+end
