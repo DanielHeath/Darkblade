@@ -2,10 +2,7 @@ class View::Attributes < View::Base
   include Singleton
   attr_reader :attribute_dots
   
-  def add_caption(app)
-    super
-    @caption.text = "Attributes"
-  end
+  caption_text "Attributes"
   
   def add_components(app)
     super

@@ -1,10 +1,7 @@
 class View::Merits < View::Base
   include Singleton
   
-  def add_caption(app)
-    super
-    @caption.text = "Merits"
-  end
+  caption_text "Merits"
   
   def add_components(app)
     super

@@ -1,10 +1,7 @@
 class View::Specializations < View::Base
   include Singleton
   
-  def add_caption(app)
-    super
-    @caption.text = "Specializations"
-  end
+  caption_text "Specializations"
   
   def add_components(app)
     super

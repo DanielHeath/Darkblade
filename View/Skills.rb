@@ -1,10 +1,7 @@
 class View::Skills < View::Base
   include Singleton
   
-  def add_caption(app)
-    super
-    @caption.text = "Skills"
-  end
+  caption_text "Skills"
   
   def add_components(app)
     super
