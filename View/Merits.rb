@@ -24,8 +24,7 @@ class View::Merits < View::Base
     @displays.each { |d| d.remove} if @displays
     
     @add_merit_button.click do
-      debug "Adding new merit"
-      add_merit(@app, character) # Bind to the new character
+      add_merit(@app, character) # Bind click event to the new character
     end
     
     merits = []
@@ -101,7 +100,6 @@ class View::Merits < View::Base
   def add_merit_controls(character, ref)
     @app.flow do
       @app.remove_button do 
-        debug "Removing #{ref.name}"
         character.original_merits.remove ref
         character.final_merits.remove ref
         @displays[ref.name].remove
