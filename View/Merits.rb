@@ -1,14 +1,3 @@
-require File.dirname(__FILE__) + "/../Model/Character/Merits.rb"
-require File.dirname(__FILE__) + "/../Lib/Utils.rb"
-require File.dirname(__FILE__) + "/../Model/Reference/Merits/Merits.rb"
-require File.dirname(__FILE__) + "/Controls/RemoveButton.rb"
-require File.dirname(__FILE__) + "/Controls/AddButton.rb"
-
-require File.dirname(__FILE__) + "/Base.rb"
-require 'singleton'
-
-module View;end
-
 class View::Merits < View::Base
   include Singleton
   

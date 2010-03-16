@@ -1,5 +1,3 @@
-require File.dirname(__FILE__) + "/../../Lib/Utils.rb"
-
 module Model;end
 
 class Model::Skills

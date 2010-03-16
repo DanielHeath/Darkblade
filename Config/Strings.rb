@@ -1,5 +1,4 @@
 # This file contains UI strings, which you can customize.
-require File.dirname(__FILE__) + "/Config/Costs.rb"
 
 module Strings
 

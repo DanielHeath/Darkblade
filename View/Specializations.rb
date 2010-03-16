@@ -1,11 +1,3 @@
-require File.dirname(__FILE__) + "/../Model/Character/Specializations.rb"
-require File.dirname(__FILE__) + "/../Lib/Utils.rb"
-require File.dirname(__FILE__) + "/../Config/Skills.rb"
-require File.dirname(__FILE__) + "/Base.rb"
-require 'singleton'
-
-module View;end
-
 class View::Specializations < View::Base
   include Singleton
   

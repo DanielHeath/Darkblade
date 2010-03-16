@@ -1,13 +1,3 @@
-require File.dirname(__FILE__) + "/../Model/Character/Attributes.rb"
-require File.dirname(__FILE__) + "/../Lib/Utils.rb"
-require File.dirname(__FILE__) + "/Controls/LabelledDots.rb"
-require File.dirname(__FILE__) + "/../Config/Attributes.rb"
-require File.dirname(__FILE__) + "/../Strings.rb"
-require File.dirname(__FILE__) + "/Base.rb"
-require 'singleton'
-
-module View;end
-
 class View::Attributes < View::Base
   include Singleton
   attr_reader :attribute_dots

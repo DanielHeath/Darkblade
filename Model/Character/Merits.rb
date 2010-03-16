@@ -36,7 +36,6 @@ class Model::Merits
     @vals.delete ref_merit(name_or_ref)
   end
   
-  
   private
   
   def ref_merit(name_or_ref)

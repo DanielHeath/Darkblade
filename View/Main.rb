@@ -1,3 +1,13 @@
+module View;end
+require File.dirname(__FILE__) + "/Controls/RemoveButton.rb"
+require File.dirname(__FILE__) + "/Controls/AddButton.rb"
+require File.dirname(__FILE__) + "/Controls/LabelledDots.rb"
+require File.dirname(__FILE__) + "/Base.rb"
+require File.dirname(__FILE__) + "/Attributes.rb"
+require File.dirname(__FILE__) + "/Skills.rb"
+require File.dirname(__FILE__) + "/Specializations.rb"
+require File.dirname(__FILE__) + "/Merits.rb"
+
 class MainScreen < Shoes
   url '/', :index
   

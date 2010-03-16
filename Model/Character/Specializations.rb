@@ -1,6 +1,3 @@
-require File.dirname(__FILE__) + "/../../Lib/Utils.rb"
-require File.dirname(__FILE__) + "/../../Config/Skills.rb"
-
 module Model;end
 
 class Model::Specializations < Array
