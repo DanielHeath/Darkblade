@@ -9,7 +9,6 @@ class View::Base
   
   def add_caption(app)
     @app = app
-    debug self.inspect
     @app.stack(:width => '25%') do
       @caption = app.caption(self.class.caption_text || "")
     end.click do |button, left, top|
