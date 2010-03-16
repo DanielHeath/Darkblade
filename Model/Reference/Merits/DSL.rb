@@ -5,21 +5,8 @@ module Reference; end;
 
 module Reference::DSL
   
-  def self.new_merit(merit, type, valid_costs, options = {})
-    # If the last merit was declared as specialized, make 10 copies.
-    # to support specializing multiple times. 
-    # Ugly, but I don't want to waste UI space for the 3 merits that use it.
-    if @last and @last_specialized then
-      (1..9).each do |i|
-        new = Reference::Merit.new(@last.name.to_s + i.to_s, @last.type, @last.costs)
-        @last.prereqs.each do |p|
-          new.add_prerequisite p
-        end # each prereq
-      end # 1 to 9
-    end # If the previous merit was specialized
-    
-    @last = Reference::Merit.new(merit, type, valid_costs)
-    @last_specialized = options[:specialized]
+  def self.new_merit(merit, type, valid_costs, options = {})    
+    @last = Reference::Merit.new(merit, type, valid_costs, options[:specialized])
   end
 
   def self.mental(merit, valid_costs, options = {})

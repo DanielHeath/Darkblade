@@ -1,7 +1,7 @@
 module Reference; end;
 
 class Reference::Merit
-  attr_reader :name, :type, :costs, :prereqs
+  attr_reader :name, :type, :costs, :prereqs, :specialized
   
   # We only want to sort the list once.
   @@merits_sorted = false
@@ -16,8 +16,8 @@ class Reference::Merit
     @@merits.detect {|m| m.name == name}
   end
   
-  def initialize(name, type, costs)
-    @name, @type, @costs = name, type, costs
+  def initialize(name, type, costs, specialized)
+    @name, @type, @costs, @specialized = name, type, costs, specialized
     @prereqs = []
     (@@merits ||= []).push self
   end
